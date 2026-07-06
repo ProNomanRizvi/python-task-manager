@@ -38,12 +38,13 @@ Enter the number corresponding to the action you want, and follow the prompts.
 ## Project Structure
 
 ```
-task-manager/
-├── main.py            # Core application logic
-├── tasks.jsonl         # Task storage (JSON Lines format, auto-created)
-├── log.txt             # Auto-generated function call logs
-├── requirements.txt     # Dependencies (none needed)
-└── README.md
+python-task-manager/
+├── screenshots/         # Terminal screenshots for documentation
+├── log.txt              # Auto-generated function call logs
+├── main.py              # Core application logic
+├── README.md
+├── requirements.txt      # Dependencies (none needed)
+└── tasks.jsonl           # Task storage (JSON Lines format, auto-created)
 ```
 
 ## How It Works
