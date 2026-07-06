@@ -1,0 +1,40 @@
+2026-07-06T09:23:14.543322 | main | args=() | kwargs={}
+2026-07-06T09:23:14.543454 | load_tasks | args=() | kwargs={}
+2026-07-06T09:23:30.977865 | add_task | args=([], 'Dinner') | kwargs={}
+2026-07-06T09:23:30.977967 | save_tasks | args=([{'id': 1, 'title': 'Dinner', 'completed': False, 'created_at': '2026-07-06T09:23:30.977913'}],) | kwargs={}
+2026-07-06T09:23:36.066764 | list_tasks | args=([{'id': 1, 'title': 'Dinner', 'completed': False, 'created_at': '2026-07-06T09:23:30.977913'}],) | kwargs={}
+2026-07-06T09:23:36.066873 | save_tasks | args=([{'id': 1, 'title': 'Dinner', 'completed': False, 'created_at': '2026-07-06T09:23:30.977913'}],) | kwargs={}
+2026-07-06T09:23:44.889698 | mark_complete | args=([{'id': 1, 'title': 'Dinner', 'completed': False, 'created_at': '2026-07-06T09:23:30.977913'}], 1) | kwargs={}
+2026-07-06T09:23:44.889782 | save_tasks | args=([{'id': 1, 'title': 'Dinner', 'completed': True, 'created_at': '2026-07-06T09:23:30.977913'}],) | kwargs={}
+2026-07-06T09:23:51.441855 | list_tasks | args=([{'id': 1, 'title': 'Dinner', 'completed': True, 'created_at': '2026-07-06T09:23:30.977913'}],) | kwargs={}
+2026-07-06T09:23:51.441947 | save_tasks | args=([{'id': 1, 'title': 'Dinner', 'completed': True, 'created_at': '2026-07-06T09:23:30.977913'}],) | kwargs={}
+2026-07-06T09:31:28.449624 | main | args=() | kwargs={}
+2026-07-06T09:31:28.449686 | load_tasks | args=() | kwargs={}
+2026-07-06T09:31:31.598819 | list_tasks | args=([],) | kwargs={}
+2026-07-06T09:31:36.918212 | add_task | args=([], 'ali') | kwargs={}
+2026-07-06T09:31:36.918428 | save_tasks | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:31:36.918322'}],) | kwargs={}
+2026-07-06T09:33:07.291301 | main | args=() | kwargs={}
+2026-07-06T09:33:07.291365 | load_tasks | args=() | kwargs={}
+2026-07-06T09:33:17.055845 | add_task | args=([], 'ali') | kwargs={}
+2026-07-06T09:33:17.056012 | save_tasks | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:33:17.055969'}],) | kwargs={}
+2026-07-06T09:33:45.048931 | main | args=() | kwargs={}
+2026-07-06T09:33:45.049009 | load_tasks | args=() | kwargs={}
+2026-07-06T09:33:49.037332 | add_task | args=([], 'ali') | kwargs={}
+2026-07-06T09:33:49.037405 | save_tasks | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:33:49.037381'}],) | kwargs={}
+2026-07-06T09:34:07.028382 | main | args=() | kwargs={}
+2026-07-06T09:34:07.028462 | load_tasks | args=() | kwargs={}
+2026-07-06T09:34:10.600079 | add_task | args=([], 'ali') | kwargs={}
+2026-07-06T09:34:10.600159 | save_tasks | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:34:10.600136'}],) | kwargs={}
+2026-07-06T09:37:39.971547 | main | args=() | kwargs={}
+2026-07-06T09:37:39.971621 | load_tasks | args=() | kwargs={}
+2026-07-06T09:37:42.647205 | list_tasks | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:34:10.600136'}],) | kwargs={}
+2026-07-06T09:37:51.468949 | add_task | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:34:10.600136'}], 'noman') | kwargs={}
+2026-07-06T09:37:51.469126 | save_tasks | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:34:10.600136'}, {'id': 2, 'title': 'noman', 'completed': False, 'created_at': '2026-07-06, 09:37 AM'}],) | kwargs={}
+2026-07-06T09:39:40.237340 | main | args=() | kwargs={}
+2026-07-06T09:39:40.237412 | load_tasks | args=() | kwargs={}
+2026-07-06T09:39:46.450614 | add_task | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:34:10.600136'}, {'id': 2, 'title': 'noman', 'completed': False, 'created_at': '2026-07-06, 09:37 AM'}], 'Noman Ali') | kwargs={}
+2026-07-06T09:39:46.450816 | save_tasks | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:34:10.600136'}, {'id': 2, 'title': 'noman', 'completed': False, 'created_at': '2026-07-06, 09:37 AM'}, {'id': 3, 'title': 'Noman Ali', 'completed': False, 'created_at': '2026-07-06, 09:39 AM'}],) | kwargs={}
+2026-07-06T09:40:20.603625 | main | args=() | kwargs={}
+2026-07-06T09:40:20.603695 | load_tasks | args=() | kwargs={}
+2026-07-06T09:40:24.905705 | add_task | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:34:10.600136'}, {'id': 2, 'title': 'noman', 'completed': False, 'created_at': '2026-07-06, 09:37 AM'}, {'id': 3, 'title': 'Noman Ali', 'completed': False, 'created_at': '2026-07-06, 09:39 AM'}], 'kjs') | kwargs={}
+2026-07-06T09:40:24.905893 | save_tasks | args=([{'id': 1, 'title': 'ali', 'completed': False, 'created_at': '2026-07-06T09:34:10.600136'}, {'id': 2, 'title': 'noman', 'completed': False, 'created_at': '2026-07-06, 09:37 AM'}, {'id': 3, 'title': 'Noman Ali', 'completed': False, 'created_at': '2026-07-06, 09:39 AM'}, {'id': 4, 'title': 'kjs', 'completed': False, 'created_at': '2026-07-06, 09:40 AM'}],) | kwargs={}
