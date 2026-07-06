@@ -92,7 +92,20 @@ Tasks:
 
 ## Screenshots
 
-_Add terminal screenshots here showing the menu, adding a task, and the generator view in action._
+**Main Menu**
+![Menu](screenshots/menu.png)
+
+**Adding a Task**
+![Add Task](screenshots/add_task.png)
+
+**Listing Tasks**
+![List Tasks](screenshots/list_tasks.png)
+
+**Marking a Task Complete**
+![Mark Complete](screenshots/mark_complete.png)
+
+**Generator View**
+![Generator View](screenshots/generator_view.png)
 
 ## Author
 
