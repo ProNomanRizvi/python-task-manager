@@ -110,4 +110,4 @@ Tasks:
 
 ## Author
 
-Muhammad Noman Rizvi ([@ProNomanRizvi](https://github.com/ProNomanRizvi))
+Noman Rizvi ([@ProNomanRizvi](https://github.com/ProNomanRizvi))
