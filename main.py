@@ -1,9 +1,36 @@
 import json
+import os
+import tempfile
+from pathlib import Path
 from datetime import datetime
 from functools import wraps
 
 TASKS_FILE = "tasks.jsonl"
 LOG_FILE = "log.txt"
+
+
+class TaskDataError(ValueError):
+    """Stored task data is invalid; do not overwrite it."""
+
+
+def parse_task(line, line_number):
+    try:
+        task = json.loads(line)
+    except json.JSONDecodeError as exc:
+        raise TaskDataError(f"Invalid JSON on line {line_number}.") from exc
+
+    if (
+        not isinstance(task, dict)
+        or isinstance(task.get("id"), bool)
+        or not isinstance(task.get("id"), int)
+        or task["id"] < 1
+        or not isinstance(task.get("title"), str)
+        or not task["title"].strip()
+        or not isinstance(task.get("completed"), bool)
+        or not isinstance(task.get("created_at"), str)
+    ):
+        raise TaskDataError(f"Invalid task on line {line_number}.")
+    return task
 
 
 def log_call(func):
@@ -23,18 +50,19 @@ def log_call(func):
 @log_call
 def load_tasks():
     tasks = []
+    seen_ids = set()
 
     try:
         with open(TASKS_FILE, "r") as file:
-            for line in file:
-                line = line.strip()
-                if line:
-                    tasks.append(json.loads(line))
-
+            for line_number, line in enumerate(file, start=1):
+                if not line.strip():
+                    continue
+                task = parse_task(line, line_number)
+                if task["id"] in seen_ids:
+                    raise TaskDataError(f"Duplicate task ID on line {line_number}.")
+                seen_ids.add(task["id"])
+                tasks.append(task)
     except FileNotFoundError:
-        return []
-
-    except json.JSONDecodeError:
         return []
 
     return tasks
@@ -42,9 +70,29 @@ def load_tasks():
 
 @log_call
 def save_tasks(tasks):
-    with open(TASKS_FILE, "w") as file:
-        for task in tasks:
-            file.write(json.dumps(task) + "\n")
+    """Replace the task file only after the complete new version is written."""
+    path = Path(TASKS_FILE)
+    temp_name = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", dir=path.parent,
+            prefix=f".{path.name}.", suffix=".tmp", delete=False
+        ) as temp_file:
+            temp_name = temp_file.name
+            seen_ids = set()
+            for line_number, task in enumerate(tasks, start=1):
+                # Validate before replacing the existing file.
+                task = parse_task(json.dumps(task), line_number)
+                if task["id"] in seen_ids:
+                    raise TaskDataError(f"Duplicate task ID on line {line_number}.")
+                seen_ids.add(task["id"])
+                temp_file.write(json.dumps(task) + "\n")
+            temp_file.flush()
+            os.fsync(temp_file.fileno())
+        os.replace(temp_name, path)
+    finally:
+        if temp_name is not None and os.path.exists(temp_name):
+            os.unlink(temp_name)
 
 
 @log_call
@@ -101,22 +149,27 @@ def list_tasks(tasks):
 def read_tasks_generator(filepath):
     try:
         with open(filepath, "r") as file:
-            for line in file:
-                line = line.strip()
-
-                if line:
-                    yield json.loads(line)
-
+            seen_ids = set()
+            for line_number, line in enumerate(file, start=1):
+                if not line.strip():
+                    continue
+                task = parse_task(line, line_number)
+                if task["id"] in seen_ids:
+                    raise TaskDataError(f"Duplicate task ID on line {line_number}.")
+                seen_ids.add(task["id"])
+                yield task
     except FileNotFoundError:
-        return
-
-    except json.JSONDecodeError:
         return
 
 
 @log_call
 def main():
-    tasks = load_tasks()
+    try:
+        tasks = load_tasks()
+    except TaskDataError as exc:
+        print(f"Cannot load tasks: {exc}")
+        print(f"Original file preserved: {TASKS_FILE}. Repair it before editing tasks.")
+        return
 
     while True:
         print("\n===== TO-DO MENU =====")
@@ -154,9 +207,12 @@ def main():
             elif choice == 5:
                 print("\nTasks (Generator):")
 
-                for task in read_tasks_generator(TASKS_FILE):
-                    status = "✓" if task["completed"] else "✗"
-                    print(f"{task['id']}. {task['title']} [{status}]")
+                try:
+                    for task in read_tasks_generator(TASKS_FILE):
+                        status = "✓" if task["completed"] else "✗"
+                        print(f"{task['id']}. {task['title']} [{status}]")
+                except TaskDataError as exc:
+                    print(f"Cannot display tasks: {exc}")
 
             elif choice == 6:
                 print("Goodbye!")

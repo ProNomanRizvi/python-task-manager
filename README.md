@@ -8,7 +8,7 @@ A simple command-line task management app built with core Python — no external
 - Persistent storage using JSON Lines (`tasks.jsonl`)
 - Function call logging via a custom decorator (`log.txt`)
 - Memory-efficient task reading using a generator (reads tasks one line at a time instead of loading the whole file into memory)
-- Graceful error handling for invalid input, missing files, and corrupted data
+- Safe storage: invalid task data stops edits and leaves the original file untouched; saves replace the file only after a complete write
 
 ## Requirements
 
@@ -42,6 +42,7 @@ python-task-manager/
 ├── screenshots/         # Terminal screenshots for documentation
 ├── log.txt              # Auto-generated function call logs
 ├── main.py              # Core application logic
+├── tests/test_main.py   # Storage and corruption regression tests
 ├── README.md
 ├── requirements.txt      # Dependencies (none needed)
 └── tasks.jsonl           # Task storage (JSON Lines format, auto-created)
@@ -66,8 +67,19 @@ The "View Tasks (Generator)" menu option uses `read_tasks_generator()`, which re
 
 ### Error Handling
 - Invalid menu choices and non-numeric input are caught and handled
-- Missing or corrupted `tasks.jsonl` is handled gracefully (returns an empty task list instead of crashing)
+- Missing `tasks.jsonl` starts with an empty list. If an existing file contains invalid JSON, an invalid task, or duplicate IDs, the app shows the line number and exits before edits can overwrite it. Repair or restore that file before continuing.
+- Saves write to a temporary file in the same directory, then atomically replace `tasks.jsonl` after the full new version is written.
 - Invalid task IDs during complete/delete operations are reported without crashing the app
+
+## Tests
+
+Run the standard-library test suite from the repository root:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+The tests cover corrupt input, duplicate IDs, a failed save, missing files, and normal round trips.
 
 ## Example Usage
 
